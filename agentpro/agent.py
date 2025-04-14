@@ -138,7 +138,7 @@ class AgentPro:
                 print("OpenRouter API key not found, using default OpenAI client with gpt-4o-mini")
                 while True:
                     response = self.client.chat.completions.create(
-                        model="gpt-4o-mini",
+                        model="gpt-4.1",
                         messages=self.messages,
                         max_tokens=8000
                     ).choices[0].message.content.strip()
@@ -159,7 +159,7 @@ class AgentPro:
             try:
                 while True:
                     response = self.client.chat.completions.create(
-                        model="gpt-4o-mini",
+                        model="gpt-4.1",
                         messages=self.messages,
                         max_tokens=8000
                     ).choices[0].message.content.strip()
