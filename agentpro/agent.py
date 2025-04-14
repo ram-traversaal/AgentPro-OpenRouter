@@ -106,6 +106,8 @@ class AgentPro:
     #        if "Action" in response and "Action Input" in response:
     #            observation = self.tool_call(response)
     #            self.messages.append({"role": "assistant", "content": observation})
+    #        if "Final Answer" in response:
+    #            return response.split("Final Answer:")[-1].strip()
     def __call__(self, prompt):
         self.messages.append({"role": "user", "content": prompt})
         response = ""
@@ -125,11 +127,13 @@ class AgentPro:
                     print("="*80)
                     print(response)
                     print("="*80)
-                    if "Final Answer" in response:
-                        return response.split("Final Answer:")[-1].strip()
+                    #if "Final Answer" in response:
+                    #    return response.split("Final Answer:")[-1].strip()
                     if "Action" in response and "Action Input" in response:
                         observation = self.tool_call(response)
                         self.messages.append({"role": "assistant", "content": observation})
+                    if "Final Answer" in response:
+                        return response.split("Final Answer:")[-1].strip()    
             else: # Fall back to default OpenAI client
                 print("OpenRouter API key not found, using default OpenAI client with gpt-4o-mini")
                 while True:
@@ -142,11 +146,13 @@ class AgentPro:
                     print("="*80)
                     print(response)
                     print("="*80)
-                    if "Final Answer" in response:
-                        return response.split("Final Answer:")[-1].strip()
+                    #if "Final Answer" in response:
+                    #    return response.split("Final Answer:")[-1].strip()
                     if "Action" in response and "Action Input" in response:
                         observation = self.tool_call(response)
                         self.messages.append({"role": "assistant", "content": observation})
+                    if "Final Answer" in response:
+                        return response.split("Final Answer:")[-1].strip()    
         except Exception as e:
             print(f"Error with primary model: {e}")
             print("Falling back to default OpenAI client with gpt-4o-mini")
@@ -161,11 +167,13 @@ class AgentPro:
                     print("="*80)
                     print(response)
                     print("="*80)
-                    if "Final Answer" in response:
-                        return response.split("Final Answer:")[-1].strip()
+                    #if "Final Answer" in response:
+                    #    return response.split("Final Answer:")[-1].strip()
                     if "Action" in response and "Action Input" in response:
                         observation = self.tool_call(response)
                         self.messages.append({"role": "assistant", "content": observation})
+                    if "Final Answer" in response:
+                        return response.split("Final Answer:")[-1].strip()    
             except Exception as e2:
                 print(f"Critical error with all models: {e2}")
                 return f"Error: Failed to generate response with both primary and fallback models. Details: {str(e2)}"
